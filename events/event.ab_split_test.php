@@ -15,13 +15,10 @@
 						 'author' => array('name' => 'Nils Werner',
 										   'website' => 'http://www.phoque.de',
 										   'email' => 'nils.werner@gmail.com'),
-						 'version' => '1.0',
+						 'version' => '1.1',
 						 'release-date' => '2010-06-24',
 						 'trigger-condition' => 'anything',
-						 'recognised-fields' => array(
-													array('username', true), 
-													array('password', true)
-												));						 
+						 );						 
 		}
 				
 		public function load(){			
