@@ -8,10 +8,10 @@
 		
 		public static function about(){
 			
-			$description = new XMLElement('p', __('This is an event that divides new visitors into two groups for A/B testing. It will save that assign and the time of the last visit in a cookie. This information can be deleted in the Preferences dialog.'));
+			$description = new XMLElement('p', __('This is an event that divides new visitors into two groups for A/B testing. It will save that assign and, time of the last visit and the total number of visits in a cookie. This information can be deleted in the Preferences dialog. Append this Event to all Pages you want to include in the test.'));
 					
 			return array(
-						 'name' => 'A/B Split Test',
+						 'name' => __('A/B Split Test'),
 						 'author' => array('name' => 'Nils Werner',
 										   'website' => 'http://www.phoque.de',
 										   'email' => 'nils.werner@gmail.com'),
@@ -29,7 +29,7 @@
 		}
 
 		public static function documentation(){
-			return new XMLElement('p', __('This is an event that divides new visitors into two groups for A/B testing. It will save that assign and the time of the last visit in a cookie. This information can be deleted in the Preferences dialog.'));
+			return new XMLElement('p', __('This is an event that divides new visitors into two groups for A/B testing. It will save that assign and, time of the last visit and the total number of visits in a cookie. This information can be deleted in the Preferences dialog. Append this Event to all Pages you want to include in the test.'));
 		}
 		
 		protected function __trigger(){

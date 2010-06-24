@@ -67,6 +67,5 @@
 		public function __SavePreferences($context){
 			Administration::instance()->Configuration->set('testid',substr(md5(time()), 0, 5),'ab');
 			Administration::instance()->saveConfig();
-			Administration::instance()->Page->pageAlert(__('A/B test ID reset.'), Alert::SUCCESS);
 		}
 	}
