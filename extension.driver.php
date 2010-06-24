@@ -10,7 +10,7 @@
 			return array('name' => 'A/B Split Test',
 						 'version' => '1.0',
 						 'release-date' => '2008-08-07',
-						 'author' => array('name' => 'Mark Lewis',
+						 'author' => array('name' => 'Mark Lewis, Nils Werner',
 										   'website' => 'http://www.casadelewis.com',
 										   'email' => 'mark@casadelewis.com'),
 						 'description' => 'Allows A/B split testing of a page.'
@@ -20,56 +20,53 @@
 		public function getSubscribedDelegates() {
 			return array(
 				array(
-					'page'		=> '/frontend/',
-					'delegate'	=> 'FrontendParamsResolve',
-					'callback'	=> 'getPath'
-				),
-				array(
-					'page' => '/frontend/',
-					'delegate' => 'FrontendProcessEvents',
-					'callback' => '__redirect'							
-				)
+					'page' => '/system/preferences/',
+					'delegate' => 'AddCustomPreferenceFieldsets',
+					'callback' => 'appendPreferences'
+				),	
 			);
 		}
 		
-	/*-------------------------------------------------------------------------
-		Utilities:
-	-------------------------------------------------------------------------*/
+		function install() {
+			Administration::instance()->Configuration->set('testid',substr(md5(time()), 0, 5),'ab');            
+			Administration::instance()->saveConfig();
+			return true;
+		}
 		
-		public function ab() {
+		public function uninstall(){
+			Administration::instance()->Configuration->remove('ab');
+			Administration::instance()->saveConfig();
+		}
+		
+		public function appendPreferences($context){
 			
-			if(rand(1,2) == 1)
-				return 'a';
-			else
-				return 'b';
-		}
-		
-	/*-------------------------------------------------------------------------
-		Delegates:
-	-------------------------------------------------------------------------*/
-		
-		public function getPath($context) {
-
-			$this->_Path = $context['params']['current-path'];
-		}
-		
-		public function __redirect($context) {
-		
-			if($this->ab() == 'a') {
-				return false;
-			} else {
-				if(is_array($context['page_data']['type']) && !empty($context['page_data']['type'])) {
-					foreach($context['page_data']['type'] as $val) {
-						if(strstr($context['page_data']['params'], 'ab')) {
-							if($val == 'index')
-								redirect(URL . '/' . $context['page_data']['handle'] . '/b/');
-							else
-								redirect(URL . $this->_Path .'b/');
-						}
-					}
-				} else {
-					redirect(URL . $this->_Path .'b/');
-				}	
+			if(isset($_POST['action']['ab-reset'])){
+				$this->__SavePreferences($context);
 			}
+			
+			$group = new XMLElement('fieldset');
+			$group->setAttribute('class', 'settings');
+			$group->appendChild(new XMLElement('legend', __('A/B Split Test')));			
+			
+
+			$div = new XMLElement('div', NULL, array('id' => 'file-actions', 'class' => 'label'));			
+			$span = new XMLElement('span');
+			
+			$span->appendChild(new XMLElement('button', __('Reset assigns'), array('name' => 'action[ab-reset]', 'type' => 'submit')));	
+			
+			$div->appendChild($span);
+
+			$div->appendChild(new XMLElement('p', __('Resets A/B group assigns for a new test.'), array('class' => 'help')));	
+
+			$group->appendChild($div);						
+			$context['wrapper']->appendChild($group);
+			unset($context);
+						
+		}
+		
+		public function __SavePreferences($context){
+			Administration::instance()->Configuration->set('testid',substr(md5(time()), 0, 5),'ab');
+			Administration::instance()->saveConfig();
+			Administration::instance()->Page->pageAlert(__('A/B test ID reset.'), Alert::SUCCESS);
 		}
 	}
