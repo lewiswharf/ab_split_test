@@ -8,12 +8,17 @@
 	
 		public function about(){
 			return array('name' => 'A/B Split Test',
-						 'version' => '1.0',
-						 'release-date' => '2008-08-07',
-						 'author' => array('name' => 'Mark Lewis, Nils Werner',
-										   'website' => 'http://www.casadelewis.com',
-										   'email' => 'mark@casadelewis.com'),
-						 'description' => 'Allows A/B split testing of a page.'
+						 'version' => '1.11',
+						 'release-date' => '2011-02-10',
+						 'author' => array(
+							array('name' => 'Mark Lewis',
+							   'website' => 'http://www.casadelewis.com',
+							   'email' => 'mark@casadelewis.com'),
+							array('name' => 'Nils Werner',
+   							   'website' => 'http://www.phoque.de',
+							   'email' => 'nils.werner@gmail.com'),
+							),					 
+						'description' => 'Allows A/B split testing of a page.'
 				 		);
 		}
 				
@@ -49,12 +54,14 @@
 			$group->appendChild(new XMLElement('legend', __('A/B Split Test')));			
 			
 
-			$div = new XMLElement('div', NULL, array('id' => 'file-actions', 'class' => 'label'));			
+			$div = new XMLElement('div', NULL, array('id' => 'file-actions', 'class' => 'label'));
+			$para = new XMLElement('p');		
 			$span = new XMLElement('span');
 			
 			$span->appendChild(new XMLElement('button', __('Reset assigns'), array('name' => 'action[ab-reset]', 'type' => 'submit')));	
 			
-			$div->appendChild($span);
+			$para->appendChild($span);
+			$div->appendChild($para);
 
 			$div->appendChild(new XMLElement('p', __('Resets A/B group assigns for a new test.'), array('class' => 'help')));	
 
