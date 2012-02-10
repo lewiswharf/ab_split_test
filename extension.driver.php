@@ -9,7 +9,7 @@
 		public function about(){
 			return array('name' => 'A/B Split Test',
 						 'version' => '1.11',
-						 'release-date' => '2011-02-10',
+						 'release-date' => '2012-02-10',
 						 'author' => array(
 							array('name' => 'Mark Lewis',
 							   'website' => 'http://www.casadelewis.com',
