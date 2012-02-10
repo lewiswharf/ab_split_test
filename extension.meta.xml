@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="ab_split_test" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>A/B Split Test</name>
+	<description>Incorporate A/B Split testing</description>
+	<repo type="github">https://github.com/lewiswharf/ab_split_test</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/26542/</url>
+	<types>
+		<type>Events</type>
+	</types>
+	<authors>
+		<author>
+			<name github="lewiswharf" symphony="Lewis">Mark Lewis</name>
+			<website>http://casadelewis.com</website>
+		</author>
+		<author>
+			<name github="nils-werner" symphony="phoque">Nils Werner</name>
+			<website>http://www.phoque.de</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="1.11" date="2011-02-10" min="2.0.6" />
+		<release version="1.1" date="2010-06-24" min="2.0.6" />
+	</releases>
+</extension>
