@@ -1,11 +1,6 @@
 # A/B Split Test
 
-Version: 1.11
-
-Author: Mark Lewis <mark@casadelewis.com>  
-Contributor: Nils Werner <nils.werner@gmail.com>  
-Build Date: 10 February 2012
-Requirements: Symphony 2.0.6  
+The extension randomly chooses to serve the original page or the page with a parameter set. It does not offer any built-in tracking and assumes you have an analytics package installed already.
 
 Installation
 -------------------------------------------------------------------------------

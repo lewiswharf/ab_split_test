@@ -15,8 +15,8 @@
 						 'author' => array('name' => 'Nils Werner',
 										   'website' => 'http://www.phoque.de',
 										   'email' => 'nils.werner@gmail.com'),
-						 'version' => '1.1',
-						 'release-date' => '2010-06-24',
+						 'version' => '1.2',
+						 'release-date' => '2012-05-20',
 						 'trigger-condition' => 'anything',
 						 );						 
 		}
@@ -30,10 +30,10 @@
 		}
 		
 		protected function __trigger(){
-			$testid = Frontend::instance()->Configuration->get('testid','ab');
+			$testid = Symphony::Configuration()->get('testid','ab');
 			$count = 0;
 			$lastseen = "never";
-			$this->_cookie =& new Cookie(Frontend::instance()->Configuration->get('cookie_prefix','symphony') . 'ab', TWO_WEEKS, __SYM_COOKIE_PATH__);
+			$this->_cookie =& new Cookie(Symphony::Configuration()->get('cookie_prefix','symphony') . 'ab', TWO_WEEKS, __SYM_COOKIE_PATH__);
 			
 			$result = new XMLElement('ab-split-test');
 			

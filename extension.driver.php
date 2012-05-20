@@ -5,41 +5,25 @@
 	Class extension_ab_split_test extends Extension{
 
 		private $_Path;
-	
-		public function about(){
-			return array('name' => 'A/B Split Test',
-						 'version' => '1.11',
-						 'release-date' => '2012-02-10',
-						 'author' => array(
-							array('name' => 'Mark Lewis',
-							   'website' => 'http://www.casadelewis.com',
-							   'email' => 'mark@casadelewis.com'),
-							array('name' => 'Nils Werner',
-   							   'website' => 'http://www.phoque.de',
-							   'email' => 'nils.werner@gmail.com'),
-							),					 
-						'description' => 'Allows A/B split testing of a page.'
-				 		);
-		}
-				
+					
 		public function getSubscribedDelegates() {
 			return array(
 				array(
 					'page' => '/system/preferences/',
 					'delegate' => 'AddCustomPreferenceFieldsets',
 					'callback' => 'appendPreferences'
-				),	
+				)	
 			);
 		}
 		
 		function install() {
-			Administration::instance()->Configuration->set('testid',substr(md5(time()), 0, 5),'ab');            
+			Symphony::Configuration()->set('testid',substr(md5(time()), 0, 5),'ab');            
 			Administration::instance()->saveConfig();
 			return true;
 		}
 		
 		public function uninstall(){
-			Administration::instance()->Configuration->remove('ab');
+			Symphony::Configuration()->remove('ab');
 			Administration::instance()->saveConfig();
 		}
 		
@@ -72,7 +56,7 @@
 		}
 		
 		public function __SavePreferences($context){
-			Administration::instance()->Configuration->set('testid',substr(md5(time()), 0, 5),'ab');
+			Symphony::Configuration()->set('testid',substr(md5(time()), 0, 5),'ab');
 			Administration::instance()->saveConfig();
 		}
 	}
